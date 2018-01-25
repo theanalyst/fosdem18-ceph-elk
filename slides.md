@@ -10,16 +10,6 @@
 
 ---
 
-## openSUSE
-
-+ filesystems:ceph look into Subprojects
-+ security:logging  
-
-It works  
-Leap 42.2, Tumbleweed as well as in Docker container
-
----
-
 ## Logging
 
 + *rsyslog*, *syslog-ng* to forward logs to Logstash
