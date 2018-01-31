@@ -107,8 +107,8 @@
 
 --
 
-### RGW Metadata search with ES
-#### Motivation
+##  RGW Metadata search with ES
+### Motivation
 + Objects have metadata associated with them that is often interesting to analyze
 + Since it is an "object storage" you don't have any traditional filesystems tool at your disposal
 + No `du`, `df` & friends, and either way these are hard on a dist. storage system
@@ -124,23 +124,27 @@
 
 --
 
-## Design
-+ Built atop of the multisite architecture, where metadata forwarding was already impelmented
-+ Kraken release of Ceph saw sync plugins feature
-+ Requires multiple RGWs and multiple zones
-+ A zone is made read only and forwards metadata to configured ES
-  cluster, this zone will not service any metadata deletion is also
-  handled automatically
+### Design
++ Built atop of the multisite architecture, where data & metadata is forwarded to multiple zones
++ From Kraken, we have sync plugins
++ Allows for data & metadata to be forwarded to _external_ tiers, allows for building of:
+  * Interesting solutions analyzing bucket/object/user metadata (ES for starts)
+  * Backup solutions (S3/cloud sync plugin for Mimic)
+
+--
+
+## Elastic Sync Plugin
+
++ Forwards metadata from other zones onto a ES instance
++ Requires a read only zone that doesn't cater to user requests & only forwards to ES
 
 --
 
 ## Caveats
 + ES unfortunately doesn't have an off the shelf authentication module
-+ the ES endpoint shouldn't be made public, accessible to the cluster administrators
-+ For normal user requests, RGW itself can authenticate the user, & ensures users don't see other's data¹
-+ We have an attribute mentioning owners for an object and this is used to service user req,.
-
-¹ Coming soon to a package repo near you
++ ES endpoint shouldn't be made public, accessible to the cluster administrators
++ For normal user requests, RGW itself can authenticate the user; ensures users don't see other's data
++ We have an attribute mentioning owners for an object and this is used to service user requests
 
 --
 
