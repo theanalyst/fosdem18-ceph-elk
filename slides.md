@@ -13,9 +13,10 @@
 ## Logging
 
 + *rsyslog*, *syslog-ng* to forward logs to Logstash
-+ Ceph has Graylog (GELF) support  
++ Filebeat
++ Ceph has Graylog (GELF) support
 + store logs for later use
-+ analyze logs for Alerting (Kibana, X-Pack)
++ analyze logs for [Alerting](https://www.elastic.co/products/x-pack/alerting)
 + trouble shooting/postmortem analyzing
 + predict issues with [Machine Learning](https://www.elastic.co/products/x-pack/machine-learning)
 
@@ -28,6 +29,7 @@
 + Logstash has a lot of input modules
   + `syslog { }`
   + `graylog { }`
++ Filebeat
 
 --
 
@@ -39,10 +41,9 @@
   + `log_graylog_port = 12201`
 + restart ceph services
 + or use [DeepSea](https://github.com/suse/deepsea)
-  + has support for custom Ceph config options ([b435612](https://github.com/SUSE/DeepSea/commit/b435612))
-    + `salt '*' state.apply ceph.configuration`
-  + could restart services 
-    + `salt-run state.orch ceph.restart`
+  + has support for [custom Ceph config options](https://github.com/SUSE/DeepSea/tree/master/srv/salt/ceph/configuration/files/ceph.conf.d)
+    + `salt-run state.orch ceph.stage.3`
+    + that also would restart services correctly
 
 --
 
@@ -54,15 +55,39 @@
   + to add fields
   + better indexing and managing your data
 + [Ceph Logstash example](https://github.com/irq0/ceph-tools/blob/master/logstash/logstash.conf)
++ [Supportconfig Analyzer](https://github.com/denisok/elk_supportconfig)
 
 ---
 
 ## ELK cluster
 
-+ use openSUSE ELK for traditional IT
-+ use Docker on openSUSE for ELK
-  + there are projects for full cluster (docker-elk, elk-docker)
-  + as well as Kubernetes
+[`docker-compose`](https://github.com/denisok/elk_supportconfig/blob/master/docker-compose.yml)is simple to use for development needs
+```yaml
+ elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:${TAG}
+    container_name: elasticsearch
+    environment:
+      - 'ELASTIC_PASSWORD=${ELASTIC_PASSWORD}'
+    ports: ['9200:9200']
+    networks: ['esnet']
+    healthcheck:
+      test: curl -f -s http://elastic:${ELASTIC_PASSWORD}@elasticsearch:9200 || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash-oss:${TAG}
+    container_name: logstash
+    volumes:
+      - ./pipeline/:/usr/share/logstash/pipeline/
+      - ./kibana/:/tmp/kibana/
+      - ./logs/:/tmp/supportconfig/
+    environment:
+      - 'config.reload.automatic=true'
+    ports: ['9600:9600']
+networks: ['esnet']
+```
 
 ---
 
