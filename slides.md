@@ -61,32 +61,28 @@
 
 ## ELK cluster
 
-[`docker-compose`](https://github.com/denisok/elk_supportconfig/blob/master/docker-compose.yml)is simple to use for development needs
+[`docker-compose` ](https://github.com/denisok/elk_supportconfig/blob/master/docker-compose.yml)is simple to use for development needs
+
 ```yaml
- elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:${TAG}
-    container_name: elasticsearch
-    environment:
-      - 'ELASTIC_PASSWORD=${ELASTIC_PASSWORD}'
+elasticsearch:
+  image: docker.elastic.co/elasticsearch/elasticsearch-oss:${TAG}
+  container_name: elasticsearch
+  environment:
+    - 'ELASTIC_PASSWORD=${ELASTIC_PASSWORD}'
     ports: ['9200:9200']
     networks: ['esnet']
-    healthcheck:
-      test: curl -f -s http://elastic:${ELASTIC_PASSWORD}@elasticsearch:9200 || exit 1
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
-  logstash:
-    image: docker.elastic.co/logstash/logstash-oss:${TAG}
-    container_name: logstash
-    volumes:
-      - ./pipeline/:/usr/share/logstash/pipeline/
-      - ./kibana/:/tmp/kibana/
-      - ./logs/:/tmp/supportconfig/
-    environment:
-      - 'config.reload.automatic=true'
+logstash:
+  image: docker.elastic.co/logstash/logstash-oss:${TAG}
+  container_name: logstash
+  volumes:
+    - ./pipeline/:/usr/share/logstash/pipeline/
+    - ./kibana/:/tmp/kibana/
+    - ./logs/:/tmp/supportconfig/
+  environment:
+    - 'config.reload.automatic=true'
     ports: ['9600:9600']
-networks: ['esnet']
+    networks: ['esnet']
 ```
 
 ---
