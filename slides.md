@@ -12,8 +12,8 @@
 + store logs for later use
 + analyze logs for [Alerting](https://www.elastic.co/products/x-pack/alerting)
 + analyze data with Machine Learning
-++ [X-Pack machine learning](https://www.elastic.co/products/x-pack/machine-learning)
-++ [R client](https://ropensci.org/tutorials/elastic_tutorial/)
+  + [X-Pack machine learning](https://www.elastic.co/products/x-pack/machine-learning)
+  + [R client](https://ropensci.org/tutorials/elastic_tutorial/)
 + trouble shooting/postmortem analyze
 
 --
