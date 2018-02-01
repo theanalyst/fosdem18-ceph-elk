@@ -204,7 +204,7 @@ body {
   /* word-wrap: normal; */
   overflow-wrap: break-word;
   word-wrap: break-word; /* Firefox support */
-  white-space: pre-line;
+  white-space: pre-wrap;
 }
 
 .reveal table {
