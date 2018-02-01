@@ -1,10 +1,4 @@
-## Ceph
-
-![Ceph arch](http://4.bp.blogspot.com/-yupsGmuzduA/Ur2G0gUXaXI/AAAAAAAACV4/ki853OD6ATA/s1600/ceph-arch.png)
-
----
-
-## ELK
+## ELK - www.elastic.co
 
 ![ELK Stack](img/elk_stack.png)
 
@@ -17,8 +11,10 @@
 + Ceph has Graylog (GELF) support
 + store logs for later use
 + analyze logs for [Alerting](https://www.elastic.co/products/x-pack/alerting)
-+ trouble shooting/postmortem analyzing
-+ predict issues with [Machine Learning](https://www.elastic.co/products/x-pack/machine-learning)
++ analyze data with Machine Learning
+++ [X-Pack machine learning](https://www.elastic.co/products/x-pack/machine-learning)
+++ [R client](https://ropensci.org/tutorials/elastic_tutorial/)
++ trouble shooting/postmortem analyze
 
 --
 
@@ -26,7 +22,7 @@
 
 + you can format your logs before forwarding
 + there is a tutorial for *rsyslog* how to reformat to GELF
-+ Logstash has a lot of input modules
++ Logstash has a lot of pipeline input modules
   + `syslog { }`
   + `graylog { }`
 + Filebeat
@@ -57,6 +53,25 @@
 + [Ceph Logstash example](https://github.com/irq0/ceph-tools/blob/master/logstash/logstash.conf)
 + [Supportconfig Analyzer](https://github.com/denisok/elk_supportconfig)
 
+--
+
+### Logstash pipeline filter example
+
+```json
+filter {
+  if [type] == "cephlog" {
+    grok { 
+      # https://github.com/ceph/ceph/blob/master/src/log/Entry.h
+      match => { "message" => "(?m)%{TIMESTAMP_ISO8601:stamp}\s%{NOTSPACE:thread}\s*%{INT:prio}\s(%{WORD:subsys}|):?\s%{GREEDYDATA:msg}" }
+
+      # https://github.com/ceph/ceph/blob/master/src/common/LogEntry.h
+      match => { "message" => "%{TIMESTAMP_ISO8601:stamp}\s%{NOTSPACE:name}\s%{NOTSPACE:who_type}\s%{NOTSPACE:who_addr}\s%{INT:seq}\s:\s%{PROG:channel}\s\[%{WORD:prio}\]\s%{GREEDYDATA:msg}" }
+    }
+    date { match => [ "stamp", "yyyy-MM-dd HH:mm:ss.SSSSSS", "ISO8601" ] }
+  }
+}
+```
+
 ---
 
 ## ELK cluster
@@ -84,6 +99,18 @@ logstash:
     ports: ['9600:9600']
     networks: ['esnet']
 ```
+
+--
+
+### Kibana dashboard
+
+![kibana_dashboard](img/kibana_dashboard.png)
+
+--
+
+### Kibana search
+
+![kibana_search](img/kibana_search.png)
 
 ---
 
