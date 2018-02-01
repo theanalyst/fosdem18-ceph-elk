@@ -267,6 +267,20 @@ curl -XPOST 'localhost:9200/rgw-gold/_search?size=0&pretty' -d
 
 ---
 
+### More queries
+
+```
+curl -XPOST 'localhost:9200/_search?pretty' -H 'Content-Type: application/json' -d'
+"query": {
+"bool": {"should" : [ {"term": {"tagging.key" : "author"}}, {"term" : {"tagging.value" : "gaimain"}}]}
+
+}
+
+```
+
+--
+
+
 ## Status in OpenSUSE
 - openSUSE Factory: we already have Luminous (Ceph 12.0.2), 42.3, TW
 - devel package: Filesystems:Ceph
