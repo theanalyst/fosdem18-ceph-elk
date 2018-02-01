@@ -57,7 +57,7 @@
 
 ### Logstash pipeline filter example
 
-```json
+```rb
 filter {
   if [type] == "cephlog" {
     grok { 
