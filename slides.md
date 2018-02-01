@@ -57,23 +57,20 @@
 
 ### Logstash pipeline filter example
 
+```json
+filter {
+  if [type] == "cephlog" {
+    grok { 
+      # https://github.com/ceph/ceph/blob/master/src/log/Entry.h
+      match => { "message" => "(?m)%{TIMESTAMP_ISO8601:stamp}\s%{NOTSPACE:thread}\s*%{INT:prio}\s(%{WORD:subsys}|):?\s%{GREEDYDATA:msg}" }
 
->filter {
-> if [type] == "cephlog" {
->  grok {
->   # https://github.com/ceph/ceph/blob/master/src/log/Entry.h
->   match => { "message" => "(?m)%{TIMESTAMP_ISO8601:stamp}\s%{NOTSPACE:thread}\s*%{INT:prio
->   }\s(%{WORD:subsys}|):?\s%{GREEDYDATA:msg}" }
->
->   # https://github.com/ceph/ceph/blob/master/src/common/LogEntry.h
->   match => { "message" => "%{TIMESTAMP_ISO8601:stamp}\s%{NOTSPACE:name}\s%{NOTSPACE:who_typ
->   e}\s%{NOTSPACE:who_addr}\s%{INT:seq}\s:\s%{PROG:channel}\s\[%{WORD:prio}\]\s%{GREEDYDATA:
->   msg}" }
->  }
->  date { match => [ "stamp", "yyyy-MM-dd HH:mm:ss.SSSSSS", "ISO8601" ] }
-> }
->}
-
+      # https://github.com/ceph/ceph/blob/master/src/common/LogEntry.h
+      match => { "message" => "%{TIMESTAMP_ISO8601:stamp}\s%{NOTSPACE:name}\s%{NOTSPACE:who_type}\s%{NOTSPACE:who_addr}\s%{INT:seq}\s:\s%{PROG:channel}\s\[%{WORD:prio}\]\s%{GREEDYDATA:msg}" }
+    }
+    date { match => [ "stamp", "yyyy-MM-dd HH:mm:ss.SSSSSS", "ISO8601" ] }
+  }
+}
+```
 
 ---
 
