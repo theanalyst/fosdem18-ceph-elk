@@ -201,7 +201,9 @@ body {
   padding: 5px;
   overflow: auto;
   max-height: 480px;
-  word-wrap: normal;
+  /* word-wrap: normal; */
+  overflow-wrap: break-word;
+  word-wrap: break-word; /* Firefox support */
 }
 
 .reveal table {
