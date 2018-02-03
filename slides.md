@@ -273,22 +273,8 @@ curl -XPOST 'localhost:9200/rgw-gold/_search?size=0&pretty' -d
   }
 } ```
 
----
-
-### More queries
-
-```
-curl -XPOST 'localhost:9200/_search?pretty' -H 'Content-Type: application/json' -d'
-"query": {
-"bool": {"should" : [ {"term": {"tagging.key" : "author"}}, {"term" : {"tagging.value" : "gaimain"}}]}
-
-}
-
-```
-
 --
 
-=======
 ## Contribute
 
 - https://ceph.com/IRC/ - Ceph upstream community mailing lists and IRC channels
