@@ -185,14 +185,16 @@ logstash:
 
 + Forwards metadata from other zones onto a ES instance
 + Requires a read only zone that doesn't cater to user requests & only forwards to ES
++ No off the shelf authentication module that can work with RGW
++ Recommendation to not expose ES endpoint to public
 
 --
 
-## Caveats
-+ ES unfortunately doesn't have an off the shelf authentication module
-+ ES endpoint shouldn't be made public, accessible to the cluster administrators
+## Elastic Sync Plugin: User Requests
 + For normal user requests, RGW itself can authenticate the user; ensures users don't see other's data
 + We have an attribute mentioning owners for an object and this is used to service user requests
++ Allows custom metadata fields to be set up per bucket 
++ Queries from end user on bucket
 
 --
 
@@ -280,19 +282,15 @@ curl -XPOST 'localhost:9200/_search?pretty' -H 'Content-Type: application/json' 
 
 --
 
-
-## Status in OpenSUSE
-- openSUSE Factory: we already have Luminous (Ceph 12.0.2), 42.3, TW
-- devel package: Filesystems:Ceph
-
---
-
+=======
 ## Contribute
 
-- wiki: https://en.opensuse.org/openSUSE:Ceph
-- [opensuse-ceph@opensuse.org](mailto:opensuse-ceph@opensuse.org) - Discussion of Ceph specifically on openSUSE related queries
 - https://ceph.com/IRC/ - Ceph upstream community mailing lists and IRC channels
 - http://lists.suse.com/mailman/listinfo/deepsea-users - DeepSea upstream mailing list. 
 - https://groups.google.com/forum/#!forum/openattic-users - openATTIC upstream mailing list. 
 - https://github.com/ceph/ceph - upstream Ceph sources 
+- wiki: https://en.opensuse.org/openSUSE:Ceph
+- [opensuse-ceph@opensuse.org](mailto:opensuse-ceph@opensuse.org) - Discussion of Ceph specifically on openSUSE related queries
+
+--
 
