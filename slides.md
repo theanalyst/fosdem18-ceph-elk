@@ -206,29 +206,35 @@ Eg. metadata
 
 ```json
 {
-        "_index" : "rgw-gold-ee5863d6",
+	    _index" : "rgw-default-6cb1f916",
         "_type" : "object",
-        "_id" : "34137443-8592-48d9-8ca7-160255d52ade.34137.1:foo:null",
-        "_score" : 1.0,
+        "_id" : "86740559-297e-4487-b770-d3106b900a97.34125.1:american-gods:null",
+        "_score" : 0.2876821,
         "_source" : {
-          "bucket" : "testtags213",
-          "name" : "foo",
+          "bucket" : "s3bucket",
+          "name" : "american-gods",
           "instance" : "null",
           "versioned_epoch" : 0,
           "owner" : {
-            "id" : "user1",
-            "display_name" : "user1"
+            "id" : "jane.doe",
+            "display_name" : "Jane Doe"
           },
           "permissions" : [
-            "user1"
+            "jane.doe"
           ],
           "meta" : {
-            "size" : 7,
-            "mtime" : "2017-05-04T12:54:16.462Z",
-            "etag" : "7ac66c0f148de9519b8bd264312c4d64"
-          }
-        }
-      }
+            "size" : 1387924,
+            "mtime" : "2018-02-01T22:27:36.490Z",
+            "etag" : "d41d8cd98f00b204e9800998ecf8427e",
+            "tail_tag" : "86740559-297e-4487-b770-d3106b900a97.34125.7336",
+            "x-amz-content-sha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "x-amz-date" : "20180201T222736Z"
+          },
+          "tagging" : [
+            {
+              "key" : "author",
+              "value" : "gaiman"
+            }]}}
 ```
 
 --
