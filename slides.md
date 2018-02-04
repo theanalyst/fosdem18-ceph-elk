@@ -283,9 +283,11 @@ curl -XPOST 'localhost:9200/rgw-gold/_search?size=0&pretty' -d
 --
 
 ## Future work
-- Support for ES 6
+- Support for ES 6 for RGW
 - Custom metadata fields for object tagging
-- Logstash queries to analyze common system faults
+- Elastic queries to analyze common system faults
+- Integration into Ceph dashboard
+- Analyze of meta and/or log data with Machine Learning
 
 --
 
