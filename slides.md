@@ -280,7 +280,7 @@ curl -XPOST 'localhost:9200/rgw-gold/_search?size=0&pretty' -d
 - Stats on objects with specific metadata content 
   + It is possible to index metadata to non string fields on a per bucket basis
 
---
+---
 
 ## Future work
 - Support for ES 6 for RGW
@@ -300,5 +300,5 @@ curl -XPOST 'localhost:9200/rgw-gold/_search?size=0&pretty' -d
 - wiki: https://en.opensuse.org/openSUSE:Ceph
 - [opensuse-ceph@opensuse.org](mailto:opensuse-ceph@opensuse.org) - Discussion of Ceph specifically on openSUSE related queries
 
---
+
 
