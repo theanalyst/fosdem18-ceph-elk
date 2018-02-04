@@ -193,8 +193,7 @@ logstash:
 ## Elastic Sync Plugin: User Requests
 + For normal user requests, RGW itself can authenticate the user; ensures users don't see other's data
 + We have an attribute mentioning owners for an object and this is used to service user requests
-+ Allows custom metadata fields to be set up per bucket 
-+ Queries from end user on bucket
++ Also allows for custom metadata fields to be set up per user
 
 --
 
