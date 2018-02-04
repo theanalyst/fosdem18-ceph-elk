@@ -286,7 +286,7 @@ curl -XPOST 'localhost:9200/rgw-gold/_search?size=0&pretty' -d
 - Custom metadata fields for object tagging
 - Elastic queries to analyze common system faults
 - Integration into Ceph dashboard
-- Analyze of meta and/or log data with Machine Learning
+- Analysis of meta and/or log data with Machine Learning
 
 --
 
