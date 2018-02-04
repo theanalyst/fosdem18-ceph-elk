@@ -292,12 +292,11 @@ curl -XPOST 'localhost:9200/rgw-gold/_search?size=0&pretty' -d
 
 ## Contribute
 
+- https://github.com/denisok/elk_supportconfig Github Repo for ongoing ELK 
 - https://ceph.com/IRC/ - Ceph upstream community mailing lists and IRC channels
 - http://lists.suse.com/mailman/listinfo/deepsea-users - DeepSea upstream mailing list. 
 - https://groups.google.com/forum/#!forum/openattic-users - openATTIC upstream mailing list. 
 - https://github.com/ceph/ceph - upstream Ceph sources 
-- wiki: https://en.opensuse.org/openSUSE:Ceph
-- [opensuse-ceph@opensuse.org](mailto:opensuse-ceph@opensuse.org) - Discussion of Ceph specifically on openSUSE related queries
 
 
 
