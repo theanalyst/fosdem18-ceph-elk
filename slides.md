@@ -1,4 +1,4 @@
-## ELK - www.elastic.co
+## ELK: www.elastic.co
 
 ![ELK Stack](img/elk_stack.png)
 
