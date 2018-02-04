@@ -275,6 +275,20 @@ curl -XPOST 'localhost:9200/rgw-gold/_search?size=0&pretty' -d
 
 --
 
+## Interesting queries possible
+- Object storage PUT requests on a specific time range.
+- Stats on objects with specific metadata content 
+  + It is possible to index metadata to non string fields on a per bucket basis
+
+--
+
+## Future work
+- Support for ES 6
+- Custom metadata fields for object tagging
+- Logstash queries to analyze common system faults
+
+--
+
 ## Contribute
 
 - https://ceph.com/IRC/ - Ceph upstream community mailing lists and IRC channels
